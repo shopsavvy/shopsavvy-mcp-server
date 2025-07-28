@@ -133,8 +133,9 @@ server.addTool({
         return `❌ No product found for identifier: ${identifier}`
       }
     } catch (error) {
-      log.error("Product lookup failed", { identifier, error: error.message })
-      return `❌ Error looking up product: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Product lookup failed", { identifier, error: errorMessage })
+      return `❌ Error looking up product: ${errorMessage}`
     }
   }
 })
@@ -169,8 +170,9 @@ server.addTool({
         return `❌ No products found for identifiers: ${identifiers}`
       }
     } catch (error) {
-      log.error("Batch lookup failed", { identifiers, error: error.message })
-      return `❌ Error in batch lookup: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Batch lookup failed", { identifiers, error: errorMessage })
+      return `❌ Error in batch lookup: ${errorMessage}`
     }
   }
 })
@@ -225,8 +227,9 @@ server.addTool({
         return `❌ No product found for identifier: ${identifier}`
       }
     } catch (error) {
-      log.error("Offers lookup failed", { identifier, error: error.message })
-      return `❌ Error getting offers: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Offers lookup failed", { identifier, error: errorMessage })
+      return `❌ Error getting offers: ${errorMessage}`
     }
   }
 })
@@ -275,8 +278,9 @@ server.addTool({
         return `❌ No product found for identifier: ${identifier}`
       }
     } catch (error) {
-      log.error("Retailer offers lookup failed", { identifier, retailer, error: error.message })
-      return `❌ Error getting ${retailer} offers: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Retailer offers lookup failed", { identifier, retailer, error: errorMessage })
+      return `❌ Error getting ${retailer} offers: ${errorMessage}`
     }
   }
 })
@@ -339,8 +343,9 @@ server.addTool({
         return `❌ No product found for identifier: ${identifier}`
       }
     } catch (error) {
-      log.error("Price history lookup failed", { identifier, start_date, end_date, error: error.message })
-      return `❌ Error getting price history: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Price history lookup failed", { identifier, start_date, end_date, error: errorMessage })
+      return `❌ Error getting price history: ${errorMessage}`
     }
   }
 })
@@ -364,7 +369,7 @@ server.addTool({
       }
       if (retailer) params.retailer = retailer
 
-      const result = await apiRequest("/products/scheduled", params, "PUT")
+      const result = await apiRequestPut("/products/scheduled", params)
       
       if (result.data && result.data.length > 0) {
         let response = `## ⏰ Successfully Scheduled ${result.data.length} Products\n\n`
@@ -387,8 +392,9 @@ server.addTool({
         return `❌ No products found for identifiers: ${identifiers}`
       }
     } catch (error) {
-      log.error("Product scheduling failed", { identifiers, schedule, error: error.message })
-      return `❌ Error scheduling products: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Product scheduling failed", { identifiers, schedule, error: errorMessage })
+      return `❌ Error scheduling products: ${errorMessage}`
     }
   }
 })
@@ -451,54 +457,6 @@ async function apiRequestDelete(endpoint: string, params: Record<string, any> = 
   return data
 }
 
-// Update the scheduling tool to use the PUT helper
-server.addTool({
-  name: "product_schedule",
-  description: "Schedule products for automatic price monitoring at regular intervals",
-  parameters: z.object({
-    identifiers: z.string().describe("Comma-separated list of product identifiers"),
-    schedule: z.enum(["hourly", "daily", "weekly"]).describe("Monitoring frequency"),
-    retailer: z.string().optional().describe("Optional: specific retailer domain to monitor")
-  }),
-  execute: async ({ identifiers, schedule, retailer }, { log }) => {
-    log.info(`Scheduling ${schedule} monitoring for: ${identifiers}`)
-
-    try {
-      const params: any = { 
-        ids: identifiers, 
-        schedule: schedule 
-      }
-      if (retailer) params.retailer = retailer
-
-      const result = await apiRequestPut("/products/scheduled", params)
-      
-      if (result.data && result.data.length > 0) {
-        let response = `## ⏰ Successfully Scheduled ${result.data.length} Products\n\n`
-        response += `**Monitoring Frequency:** ${schedule.charAt(0).toUpperCase() + schedule.slice(1)}\n`
-        if (retailer) response += `**Retailer Filter:** ${retailer}\n`
-        response += "\n**Scheduled Products:**\n\n"
-        
-        result.data.forEach((product: any, index: number) => {
-          response += `${index + 1}. ${product.title}\n`
-          response += `   - ShopSavvy ID: ${product.shopsavvy}\n`
-          response += `   - Schedule: ${product.schedule}\n`
-          if (product.retailer) response += `   - Retailer: ${product.retailer}\n`
-          response += "\n"
-        })
-        
-        response += `**Usage:** ${result.meta.credits_used} credits used, ${result.meta.credits_remaining} remaining`
-        
-        return response
-      } else {
-        return `❌ No products found for identifiers: ${identifiers}`
-      }
-    } catch (error) {
-      log.error("Product scheduling failed", { identifiers, schedule, error: error.message })
-      return `❌ Error scheduling products: ${error.message}`
-    }
-  }
-})
-
 server.addTool({
   name: "product_unschedule",
   description: "Remove products from the automatic price monitoring schedule",
@@ -513,8 +471,9 @@ server.addTool({
       
       return `✅ Successfully removed products from monitoring schedule.\n\n**Usage:** No credits used for unscheduling`
     } catch (error) {
-      log.error("Product unscheduling failed", { identifiers, error: error.message })
-      return `❌ Error unscheduling products: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Product unscheduling failed", { identifiers, error: errorMessage })
+      return `❌ Error unscheduling products: ${errorMessage}`
     }
   }
 })
@@ -559,8 +518,9 @@ server.addTool({
         return "📭 No products are currently scheduled for monitoring.\n\nUse the `product_schedule` tool to start monitoring products."
       }
     } catch (error) {
-      log.error("Scheduled products list failed", { error: error.message })
-      return `❌ Error getting scheduled products: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Scheduled products list failed", { error: errorMessage })
+      return `❌ Error getting scheduled products: ${errorMessage}`
     }
   }
 })
@@ -602,8 +562,9 @@ server.addTool({
         return "❌ Unable to retrieve usage statistics"
       }
     } catch (error) {
-      log.error("Usage statistics failed", { error: error.message })
-      return `❌ Error getting usage statistics: ${error.message}`
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      log.error("Usage statistics failed", { error: errorMessage })
+      return `❌ Error getting usage statistics: ${errorMessage}`
     }
   }
 })

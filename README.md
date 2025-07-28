@@ -33,7 +33,7 @@ This MCP server enables AI assistants to:
 ## Installation
 
 ```bash
-npm install shopsavvy-data-api-mcp
+npm install @shopsavvy/mcp-server
 ```
 
 ## Configuration
@@ -60,7 +60,7 @@ Add this to your Claude Desktop configuration file:
     "shopsavvy-data-api": {
       "command": "npx",
       "args": [
-        "shopsavvy-data-api-mcp"
+        "@shopsavvy/mcp-server"
       ],
       "env": {
         "SHOPSAVVY_API_KEY": "your_api_key_here"
@@ -125,7 +125,7 @@ Schedule daily price monitoring for products: 012345678901, B08N5WRWNW
 ```bash
 # Clone the repository
 git clone https://github.com/shopsavvy/data-api-mcp
-cd data-api-mcp
+cd shopsavvy-mcp-server
 
 # Install dependencies
 npm install
