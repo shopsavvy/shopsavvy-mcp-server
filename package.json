@@ -1,0 +1,44 @@
+{
+  "name": "shopsavvy-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for ShopSavvy Data API - provides product lookup, pricing, and historical data tools for AI assistants",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npx fastmcp dev src/index.ts",
+    "inspect": "npx fastmcp inspect src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "shopsavvy",
+    "product-data",
+    "pricing",
+    "e-commerce",
+    "shopping",
+    "ai-tools"
+  ],
+  "author": "ShopSavvy by Monolith Technologies, Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "fastmcp": "^3.11.0",
+    "zod": "^4.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shopsavvy/data-api-mcp"
+  },
+  "homepage": "https://shopsavvy.com/data",
+  "bugs": {
+    "url": "https://github.com/shopsavvy/data-api-mcp/issues"
+  }
+}

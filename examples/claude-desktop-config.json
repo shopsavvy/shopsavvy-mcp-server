@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "shopsavvy-data-api": {
+      "command": "npx",
+      "args": [
+        "shopsavvy-data-api-mcp"
+      ],
+      "env": {
+        "SHOPSAVVY_API_KEY": "ss_live_your_api_key_here"
+      }
+    }
+  }
+}
