@@ -47,14 +47,7 @@ Key capabilities:
 - Get current pricing offers from multiple retailers
 - Access historical pricing data with custom date ranges
 - Schedule products for automatic price monitoring (hourly, daily, weekly)
-- Track API usage and credit consumption
-
-Credit-based pricing:
-- Product lookup: 1 credit per product found
-- Current offers (all retailers): 3 credits per product
-- Current offers (single retailer): 2 credits per product  
-- Historical data: 3 credits + 1 credit per day of history
-- Scheduling: 1 credit per product scheduled
+- Track API usage
 
 Always provide specific, actionable product information to help users make informed purchasing decisions.
   `.trim()
@@ -528,7 +521,7 @@ server.addTool({
 // Analytics Tools
 server.addTool({
   name: "api_usage",
-  description: "View current API usage statistics and credit consumption",
+  description: "View current API usage statistics",
   execute: async (args, { log }) => {
     log.info("Getting API usage statistics")
 

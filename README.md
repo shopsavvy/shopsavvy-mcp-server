@@ -9,7 +9,7 @@ This MCP server enables AI assistants to:
 - **Get current pricing** from multiple retailers
 - **Access historical pricing data** with date ranges
 - **Schedule products** for automatic price monitoring
-- **Track API usage** and credit consumption
+- **Track API usage**
 
 ## Features
 
@@ -17,7 +17,7 @@ This MCP server enables AI assistants to:
 - `product_lookup` - Find products by various identifiers (barcode, ASIN, URL, etc.)
 - `product_lookup_batch` - Look up multiple products at once
 
-### 💰 Pricing Tools
+### 💰 Offer Tools
 - `product_offers` - Get current offers from all retailers
 - `product_offers_retailer` - Get offers from a specific retailer
 - `product_price_history` - Get historical pricing data with date ranges
@@ -28,7 +28,7 @@ This MCP server enables AI assistants to:
 - `scheduled_products_list` - View all scheduled products
 
 ### 📊 Analytics Tools
-- `api_usage` - View current API usage and credit consumption
+- `api_usage` - View current API usage
 
 ## Installation
 
@@ -43,8 +43,7 @@ npm install @shopsavvy/mcp-server
 First, get your ShopSavvy Data API key:
 
 1. Visit [https://shopsavvy.com/data](https://shopsavvy.com/data)
-2. Sign up and choose a subscription plan
-3. Create an API key in your dashboard
+2. Sign up and create an API key in your dashboard
 4. Copy your API key (starts with `ss_live_` or `ss_test_`)
 
 ### 2. Claude Desktop Setup
@@ -105,19 +104,6 @@ Get price history for product 012345678901 from January 1-15, 2024
 Schedule daily price monitoring for products: 012345678901, B08N5WRWNW
 ```
 
-## API Limits & Pricing
-
-- **Starter Plan**: 1,000 credits/month - $49/month
-- **Professional Plan**: 10,000 credits/month - $199/month
-- **Enterprise Plan**: 100,000 credits/month - $499/month
-
-### Credit Usage:
-- Product lookup: 1 credit per product found
-- Current offers (all retailers): 3 credits per product
-- Current offers (single retailer): 2 credits per product
-- Historical data: 3 credits + 1 credit per day of history
-- Scheduling: 1 credit per product scheduled
-
 ## Development
 
 ### Running Locally
@@ -171,7 +157,7 @@ The server provides detailed error messages for:
 - **Product Tools**: Lookup by barcode, ASIN, URL, model number, or ShopSavvy ID
 - **Pricing Tools**: Current offers from all/specific retailers, historical pricing data
 - **Scheduling Tools**: Automatic product monitoring (hourly/daily/weekly)
-- **Analytics Tools**: API usage tracking and credit consumption monitoring
+- **Analytics Tools**: API usage monitoring
 - **npm Package**: Published as `@shopsavvy/mcp-server` under ShopSavvy organization
 - **TypeScript**: Full TypeScript support with proper error handling
 - **Documentation**: Comprehensive README with examples and configuration guides

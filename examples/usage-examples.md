@@ -86,11 +86,11 @@ Remove products 012345678901 and B08N5WRWNW from monitoring
 
 ### Check Usage
 ```
-Show me my current API usage and remaining credits
+Show me my current API usage
 ```
 
 ```
-How many credits do I have left this month?
+How much usage do I have left this month?
 ```
 
 ## Complex Workflow Examples
