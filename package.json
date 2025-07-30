@@ -1,7 +1,7 @@
 {
   "name": "@shopsavvy/mcp-server",
-  "version": "1.0.0",
-  "description": "Model Context Protocol (MCP) server for ShopSavvy Data API - provides product lookup, pricing, and historical data tools for AI assistants",
+  "version": "1.0.2",
+  "description": "Model Context Protocol (MCP) server providing AI assistants with access to ShopSavvy's comprehensive product data, pricing information, historical price tracking, and automated monitoring capabilities",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
@@ -35,10 +35,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shopsavvy/data-api-mcp"
+    "url": "https://github.com/shopsavvy/shopsavvy-mcp-server"
   },
-  "homepage": "https://shopsavvy.com/data",
+  "homepage": "https://github.com/shopsavvy/shopsavvy-mcp-server",
   "bugs": {
-    "url": "https://github.com/shopsavvy/data-api-mcp/issues"
+    "url": "https://github.com/shopsavvy/shopsavvy-mcp-server/issues"
   }
 }

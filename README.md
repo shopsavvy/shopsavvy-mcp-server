@@ -57,7 +57,7 @@ Add this to your Claude Desktop configuration file:
 ```json
 {
   "mcpServers": {
-    "shopsavvy-data-api": {
+    "shopsavvy": {
       "command": "npx",
       "args": [
         "@shopsavvy/mcp-server"
@@ -124,7 +124,7 @@ Schedule daily price monitoring for products: 012345678901, B08N5WRWNW
 
 ```bash
 # Clone the repository
-git clone https://github.com/shopsavvy/data-api-mcp
+git clone https://github.com/shopsavvy/shopsavvy-mcp-server
 cd shopsavvy-mcp-server
 
 # Install dependencies
@@ -159,7 +159,22 @@ The server provides detailed error messages for:
 
 - **Documentation**: [https://shopsavvy.com/data/documentation](https://shopsavvy.com/data/documentation)
 - **Dashboard**: [https://shopsavvy.com/data/dashboard](https://shopsavvy.com/data/dashboard)
-- **Issues**: [https://github.com/shopsavvy/data-api-mcp/issues](https://github.com/shopsavvy/data-api-mcp/issues)
+- **Issues**: [https://github.com/shopsavvy/shopsavvy-mcp-server/issues](https://github.com/shopsavvy/shopsavvy-mcp-server/issues)
+
+## Changelog
+
+### v1.0.0 (2025-07-28)
+
+🎉 **Initial Release**
+
+- **Features**: Complete ShopSavvy Data API integration with MCP support
+- **Product Tools**: Lookup by barcode, ASIN, URL, model number, or ShopSavvy ID
+- **Pricing Tools**: Current offers from all/specific retailers, historical pricing data
+- **Scheduling Tools**: Automatic product monitoring (hourly/daily/weekly)
+- **Analytics Tools**: API usage tracking and credit consumption monitoring
+- **npm Package**: Published as `@shopsavvy/mcp-server` under ShopSavvy organization
+- **TypeScript**: Full TypeScript support with proper error handling
+- **Documentation**: Comprehensive README with examples and configuration guides
 
 ## License
 

@@ -14,8 +14,8 @@ Thank you for your interest in contributing to the ShopSavvy Data API MCP Server
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/shopsavvy/data-api-mcp
-   cd data-api-mcp
+   git clone https://github.com/shopsavvy/shopsavvy-mcp-server
+   cd shopsavvy-mcp-server
    ```
 
 2. **Install dependencies**
