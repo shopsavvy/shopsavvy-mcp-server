@@ -1,6 +1,6 @@
 {
   "name": "@shopsavvy/mcp-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Model Context Protocol (MCP) server providing AI assistants with access to ShopSavvy's comprehensive product data, pricing information, historical price tracking, and automated monitoring capabilities",
   "main": "src/index.ts",
   "type": "module",
