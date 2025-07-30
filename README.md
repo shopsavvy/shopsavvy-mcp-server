@@ -109,7 +109,7 @@ Schedule daily price monitoring for products: 012345678901, B08N5WRWNW
 
 - **Starter Plan**: 1,000 credits/month - $49/month
 - **Professional Plan**: 10,000 credits/month - $199/month
-- **Enterprise Plan**: 100,000 credits/month - $499/month
+- **Enterprise Plan**: 50,000 credits/month - $499/month
 
 ### Credit Usage:
 - Product lookup: 1 credit per product found
