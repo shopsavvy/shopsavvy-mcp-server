@@ -11,6 +11,10 @@ This MCP server enables AI assistants to:
 - **Schedule products** for automatic price monitoring
 - **Track API usage** and credit consumption
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/shopsavvy-shopsavvy-mcp-server).
+
 ## Features
 
 ### 🔍 Product Lookup Tools
