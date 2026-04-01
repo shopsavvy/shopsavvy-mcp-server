@@ -1,5 +1,6 @@
 # ShopSavvy Data API MCP Server
 
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/shopsavvy/shopsavvy-mcp-server)](https://archestra.ai/mcp-catalog/shopsavvy__shopsavvy-mcp-server)
 A [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that provides AI assistants with access to ShopSavvy's comprehensive product data, pricing information, and historical price tracking.
 
 ## Overview
