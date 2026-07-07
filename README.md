@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/shopsavvy-shopsavvy-mcp-server-badge.png)](https://mseep.ai/app/shopsavvy-shopsavvy-mcp-server)
+
 # ShopSavvy Data API MCP Server
 
 A [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that provides AI assistants with access to ShopSavvy's comprehensive product data, pricing information, and historical price tracking.
