@@ -72,6 +72,13 @@ else
     echo "  bun not installed -- skipping"
   fi
 
+  echo "Building..."
+  bun run build > /dev/null
+  echo "  Build OK"
+
+  echo "Running bridge tests against the hosted server (SHOPSAVVY_MCP_URL overrides)..."
+  bun test --timeout 120000
+
   echo "Checking package.json..."
   if command -v node &> /dev/null; then
     node -e "
@@ -79,6 +86,7 @@ else
       const checks = [];
       checks.push(['name', pkg.name === '@shopsavvy/mcp-server']);
       checks.push(['main', !!pkg.main]);
+      checks.push(['bin', !!(pkg.bin && pkg.bin['shopsavvy-mcp-server'])]);
       let ok = true;
       checks.forEach(([name, pass]) => { if (!pass) { console.log('  Missing: ' + name); ok = false; } });
       if (ok) console.log('  Package structure valid');
