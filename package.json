@@ -1,21 +1,18 @@
 {
   "name": "@shopsavvy/mcp-server",
-  "version": "1.0.4",
-  "description": "Model Context Protocol (MCP) server providing AI assistants with access to ShopSavvy's comprehensive product data, pricing information, historical price tracking, and automated monitoring capabilities",
-  "main": "src/index.ts",
+  "version": "2.0.0",
+  "description": "ShopSavvy MCP server for stdio MCP clients: product lookup, real-time prices across retailers, price history and buying guides. Works without an API key.",
+  "main": "dist/index.js",
   "files": [
-    "src",
     "dist",
-    "examples",
     "README.md",
-    "LICENSE",
-    "CONTRIBUTING.md"
+    "LICENSE"
   ],
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "npx fastmcp dev src/index.ts",
-    "inspect": "npx fastmcp inspect src/index.ts",
+    "prepublishOnly": "bun run build",
+    "test": "bun test",
     "start": "node dist/index.js"
   },
   "keywords": [
@@ -31,8 +28,7 @@
   "author": "ShopSavvy by Monolith Technologies, Inc.",
   "license": "MIT",
   "dependencies": {
-    "fastmcp": "^3.11.0",
-    "zod": "^4.0.10"
+    "@modelcontextprotocol/sdk": "^1.30.1"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -45,8 +41,15 @@
     "type": "git",
     "url": "https://github.com/shopsavvy/shopsavvy-mcp-server"
   },
-  "homepage": "https://github.com/shopsavvy/shopsavvy-mcp-server",
+  "homepage": "https://shopsavvy.com/agents",
   "bugs": {
     "url": "https://github.com/shopsavvy/shopsavvy-mcp-server/issues"
+  },
+  "types": "dist/index.d.ts",
+  "bin": {
+    "shopsavvy-mcp-server": "dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
