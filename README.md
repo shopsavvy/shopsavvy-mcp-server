@@ -1,171 +1,106 @@
-# ShopSavvy Data API MCP Server
+# ShopSavvy MCP Server
 
-A [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that provides AI assistants with access to ShopSavvy's comprehensive product data, pricing information, and historical price tracking.
+Give any AI assistant real-time product prices, price history, deals and buying guides from [ShopSavvy](https://shopsavvy.com), via the [Model Context Protocol](https://modelcontextprotocol.io/).
 
-## Overview
+**No signup and no API key needed.** Anonymous use is rate-limited per IP (10 tool calls per minute, 100 per hour). Add a Data API key for higher limits.
 
-This MCP server enables AI assistants to:
-- **Look up products** by barcode, ASIN, URL, model number, or ShopSavvy ID
-- **Get current pricing** from multiple retailers
-- **Access historical pricing data** with date ranges
-- **Schedule products** for automatic price monitoring
-- **Track API usage**
+## Two ways to connect
 
-## Features
+### 1. Remote server (recommended)
 
-### 🔍 Product Lookup Tools
-- `product_lookup` - Find products by various identifiers (barcode, ASIN, URL, etc.)
-- `product_lookup_batch` - Look up multiple products at once
+ShopSavvy hosts the server. Clients that support remote MCP servers connect by URL, with nothing to install:
 
-### 💰 Offer Tools
-- `product_offers` - Get current offers from all retailers
-- `product_offers_retailer` - Get offers from a specific retailer
-- `product_price_history` - Get historical pricing data with date ranges
-
-### 📅 Scheduling Tools
-- `product_schedule` - Schedule products for automatic refresh (hourly/daily/weekly)
-- `product_unschedule` - Remove products from refresh schedule
-- `scheduled_products_list` - View all scheduled products
-
-### 📊 Analytics Tools
-- `api_usage` - View current API usage
-
-## Installation
-
-```bash
-npm install @shopsavvy/mcp-server
+```
+https://api.shopsavvy.com/mcp
 ```
 
-## Configuration
+That's the Streamable HTTP endpoint. Older clients that only speak the HTTP+SSE transport can use `https://api.shopsavvy.com/mcp/sse`.
 
-### 1. Get API Key
+Per-client setup (Claude Code, Claude Desktop, claude.ai, ChatGPT, Codex, Gemini CLI, Cursor, VS Code, Windsurf) is at **[shopsavvy.com/agents](https://shopsavvy.com/agents#install)**.
 
-First, get your ShopSavvy Data API key:
+### 2. This package (for stdio-only clients)
 
-1. Visit [https://shopsavvy.com/data](https://shopsavvy.com/data)
-2. Sign up and create an API key in your dashboard
-4. Copy your API key (starts with `ss_live_` or `ss_test_`)
+Some clients can only launch a local command. This package is that command: a small bridge that relays MCP messages between your client and the hosted server. The tools always match the hosted server, because they come from it.
 
-### 2. Claude Desktop Setup
+Requires Node.js 18+.
 
-Add this to your Claude Desktop configuration file:
-
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-**Windows**: `%APPDATA%\\Claude\\claude_desktop_config.json`
+**Claude Desktop** — add to `claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/`, Windows: `%APPDATA%\Claude\`):
 
 ```json
 {
   "mcpServers": {
     "shopsavvy": {
       "command": "npx",
-      "args": [
-        "@shopsavvy/mcp-server"
-      ],
-      "env": {
-        "SHOPSAVVY_API_KEY": "your_api_key_here"
-      }
+      "args": ["-y", "@shopsavvy/mcp-server"]
     }
   }
 }
 ```
 
-### 3. Environment Variables
+Any other stdio client: run `npx -y @shopsavvy/mcp-server`.
 
-Set your API key as an environment variable:
+## Higher limits with an API key
 
-```bash
-export SHOPSAVVY_API_KEY="ss_live_your_key_here"
-```
+Get a key at [shopsavvy.com/data](https://shopsavvy.com/data), then:
 
-Or create a `.env` file:
-```
-SHOPSAVVY_API_KEY=ss_live_your_key_here
-```
+- **Remote server:** send the header `Authorization: Bearer ss_live_…`
+- **This package:** set the `SHOPSAVVY_API_KEY` environment variable:
 
-## Usage Examples
-
-### Product Lookup
-```
-Look up the product with barcode 012345678901
-```
-
-### Current Pricing
-```
-Get current prices for ASIN B08N5WRWNW from all retailers
+```json
+{
+  "mcpServers": {
+    "shopsavvy": {
+      "command": "npx",
+      "args": ["-y", "@shopsavvy/mcp-server"],
+      "env": { "SHOPSAVVY_API_KEY": "ss_live_your_key_here" }
+    }
+  }
+}
 ```
 
-### Price History
-```
-Get price history for product 012345678901 from January 1-15, 2024
-```
+## Tools
 
-### Schedule Monitoring
-```
-Schedule daily price monitoring for products: 012345678901, B08N5WRWNW
-```
+| Tool | What it does |
+|------|--------------|
+| `product_lookup` | Find a product by barcode/UPC/EAN, ASIN, URL, model number or name |
+| `product_lookup_batch` | Look up several products at once |
+| `product_search` | Keyword search across the catalog |
+| `universal_search` | Ranked search with review summaries, good for category queries |
+| `product_offers` | Current prices from every retailer |
+| `product_offers_retailer` | Current prices from one retailer (e.g. `amazon.com`) |
+| `product_price_history` | Price history over a date range |
+| `product_schedule` / `product_unschedule` / `scheduled_products_list` | Automatic price monitoring (API key required) |
+| `api_usage` | Your API key's usage |
+| `content_best_picks` | Curated "best of" buying guides |
+| `content_tldr_review` | Pros, cons and a verdict for a product |
+| `content_qa_answers` | Answers to common questions about a product |
+| `content_buying_guide` | When-to-buy timing advice |
+
+## Try asking
+
+- "What's the best price for AirPods Pro right now?"
+- "Show me the price history for B0D1XD1ZV3 over the last month."
+- "Best air fryers, and where are they cheapest?"
+- "Is now a good time to buy a TV?"
 
 ## Development
 
-### Running Locally
-
 ```bash
-# Clone the repository
 git clone https://github.com/shopsavvy/shopsavvy-mcp-server
 cd shopsavvy-mcp-server
-
-# Install dependencies
-npm install
-
-# Set your API key
-export SHOPSAVVY_API_KEY="your_key_here"
-
-# Test with MCP CLI
-npm run dev
-
-# Or inspect with MCP Inspector
-npm run inspect
+bun install
+bun run build
+bun test
 ```
 
-### Building
-
-```bash
-npm run build
-```
-
-## Error Handling
-
-The server provides detailed error messages for:
-- Invalid API keys
-- Insufficient credits
-- Rate limiting
-- Invalid product identifiers
-- API service issues
+`SHOPSAVVY_MCP_URL` points the bridge (and its tests) at another deployment of the server.
 
 ## Support
 
-- **Documentation**: [https://shopsavvy.com/data/documentation](https://shopsavvy.com/data/documentation)
-- **Dashboard**: [https://shopsavvy.com/data/dashboard](https://shopsavvy.com/data/dashboard)
-- **Issues**: [https://github.com/shopsavvy/shopsavvy-mcp-server/issues](https://github.com/shopsavvy/shopsavvy-mcp-server/issues)
-
-## Changelog
-
-### v1.0.0 (2025-07-28)
-
-🎉 **Initial Release**
-
-- **Features**: Complete ShopSavvy Data API integration with MCP support
-- **Product Tools**: Lookup by barcode, ASIN, URL, model number, or ShopSavvy ID
-- **Pricing Tools**: Current offers from all/specific retailers, historical pricing data
-- **Scheduling Tools**: Automatic product monitoring (hourly/daily/weekly)
-- **Analytics Tools**: API usage monitoring
-- **npm Package**: Published as `@shopsavvy/mcp-server` under ShopSavvy organization
-- **TypeScript**: Full TypeScript support with proper error handling
-- **Documentation**: Comprehensive README with examples and configuration guides
+- Docs: [shopsavvy.com/agents](https://shopsavvy.com/agents)
+- Issues: [github.com/shopsavvy/shopsavvy-mcp-server/issues](https://github.com/shopsavvy/shopsavvy-mcp-server/issues)
+- Email: hello@greatwork.company
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
-
----
-
-Made with ❤️ by [ShopSavvy](https://shopsavvy.com) - Empowering everyone to always get the best deal, every time.
+MIT, see [LICENSE](LICENSE).

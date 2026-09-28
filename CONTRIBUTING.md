@@ -7,8 +7,9 @@ Thank you for your interest in contributing to the ShopSavvy Data API MCP Server
 ### Prerequisites
 
 - Node.js 18 or higher
-- Bun (recommended) or npm
-- A ShopSavvy Data API key (get one at [https://shopsavvy.com/data](https://shopsavvy.com/data))
+- Bun
+
+This package is a stdio bridge to the hosted server at https://api.shopsavvy.com/mcp — tools are implemented server-side, so changes to what a tool does belong there, not here. No API key is needed to develop or test it.
 
 ### Setup Steps
 
@@ -21,37 +22,17 @@ Thank you for your interest in contributing to the ShopSavvy Data API MCP Server
 2. **Install dependencies**
    ```bash
    bun install
-   # or
-   npm install
    ```
 
-3. **Set up environment**
+3. **Build and test**
    ```bash
-   export SHOPSAVVY_API_KEY="your_api_key_here"
+   bun run build
+   bun test
    ```
 
-4. **Test the server**
-   ```bash
-   bun run dev
-   # or
-   npm run dev
-   ```
+   The tests drive `dist/index.js` through the official MCP stdio client against the hosted server. Set `SHOPSAVVY_MCP_URL` to test against another deployment.
 
 ## Development Workflow
-
-### Running Tests
-```bash
-# Test with MCP CLI
-bun run dev
-
-# Inspect with MCP Inspector
-bun run inspect
-```
-
-### Building
-```bash
-bun run build
-```
 
 ### Code Style
 
