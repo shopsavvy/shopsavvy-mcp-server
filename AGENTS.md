@@ -49,5 +49,5 @@ Build before testing: the tests run `dist/index.js`, not the source.
 - Don't add tools, tool descriptions or schemas here; they come from the hosted server.
 - Don't write to stdout outside the transport.
 - Don't put plan prices, plan names, dollar amounts or credit costs in the README; link to https://shopsavvy.com/data.
-- Don't add claims about scale, uptime or customers. Approved wording: "tens of millions of products", "tens of thousands of retailers", "price history back to 2011".
+- Don't add claims about scale, uptime or customers. Approved wording: "30M+ products", "tens of thousands of retailers", "price history back to 2011".
 - Don't publish to npm or the MCP registry from an agent session. Prepare the version bump; a maintainer publishes.
