@@ -1,6 +1,7 @@
 {
   "name": "@shopsavvy/mcp-server",
   "version": "2.0.0",
+  "mcpName": "io.github.shopsavvy/shopsavvy-mcp-server",
   "description": "ShopSavvy MCP server for stdio MCP clients: product lookup, real-time prices across retailers, price history and buying guides. Works without an API key.",
   "main": "dist/index.js",
   "files": [

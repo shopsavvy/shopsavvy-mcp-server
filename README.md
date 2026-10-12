@@ -1,6 +1,6 @@
 # ShopSavvy MCP Server
 
-Give any AI assistant real-time product prices, price history, deals and buying guides from [ShopSavvy](https://shopsavvy.com), via the [Model Context Protocol](https://modelcontextprotocol.io/).
+Give any AI assistant current product prices, price history and buying guides from [ShopSavvy](https://shopsavvy.com), via the [Model Context Protocol](https://modelcontextprotocol.io/).
 
 **No signup and no API key needed.** Anonymous use is rate-limited per IP (10 tool calls per minute, 100 per hour). Add a Data API key for higher limits.
 
@@ -75,6 +75,8 @@ Get a key at [shopsavvy.com/data](https://shopsavvy.com/data), then:
 | `content_tldr_review` | Pros, cons and a verdict for a product |
 | `content_qa_answers` | Answers to common questions about a product |
 | `content_buying_guide` | When-to-buy timing advice |
+
+Price answers end with a source line naming ShopSavvy and linking the product page on shopsavvy.com, with the time the latest price was checked, so your assistant can cite where a price came from.
 
 ## Try asking
 

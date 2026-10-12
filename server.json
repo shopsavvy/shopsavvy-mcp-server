@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.shopsavvy/shopsavvy-mcp-server",
+  "title": "ShopSavvy",
+  "description": "Product lookup, current prices across retailers, price history and buying guides. No key needed.",
+  "repository": {
+    "url": "https://github.com/shopsavvy/shopsavvy-mcp-server",
+    "source": "github"
+  },
+  "websiteUrl": "https://shopsavvy.com/agents",
+  "version": "2.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@shopsavvy/mcp-server",
+      "version": "2.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "SHOPSAVVY_API_KEY",
+          "description": "Optional ShopSavvy Data API key for higher limits (100 tool calls a minute instead of 10).",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.shopsavvy.com/mcp"
+    },
+    {
+      "type": "sse",
+      "url": "https://api.shopsavvy.com/mcp/sse"
+    }
+  ]
+}
