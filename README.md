@@ -100,6 +100,7 @@ bun test
 ## Support
 
 - Docs: [shopsavvy.com/agents](https://shopsavvy.com/agents)
+- Free tools, no install: [UPC lookup](https://shopsavvy.com/tools/upc-lookup) · [QR code generator](https://shopsavvy.com/qr/create)
 - Issues: [github.com/shopsavvy/shopsavvy-mcp-server/issues](https://github.com/shopsavvy/shopsavvy-mcp-server/issues)
 - Email: hello@greatwork.company
 
