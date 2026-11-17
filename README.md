@@ -1,5 +1,7 @@
 # ShopSavvy MCP Server
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Give any AI assistant current product prices, price history and buying guides from [ShopSavvy](https://shopsavvy.com), via the [Model Context Protocol](https://modelcontextprotocol.io/).
 
 **No signup and no API key needed.** Anonymous use is rate-limited per IP (10 tool calls per minute, 100 per hour). Add a Data API key for higher limits.
@@ -16,7 +18,25 @@ https://api.shopsavvy.com/mcp
 
 That's the Streamable HTTP endpoint. Older clients that only speak the HTTP+SSE transport can use `https://api.shopsavvy.com/mcp/sse`.
 
-Per-client setup (Claude Code, Claude Desktop, claude.ai, ChatGPT, Codex, Gemini CLI, Cursor, VS Code, Windsurf) is at **[shopsavvy.com/agents](https://shopsavvy.com/agents#install)**.
+#### Per-client install (remote)
+
+All of these use the remote URL, so nothing runs on your machine. No signup and no API key. Setup details for each client also live at **[shopsavvy.com/agents#install](https://shopsavvy.com/agents#install)**.
+
+| Client | How |
+|--------|-----|
+| **Claude Code** | `claude mcp add --transport http shopsavvy https://api.shopsavvy.com/mcp` (add `--scope user` for every project). Check with `claude mcp list` or `/mcp`. There is also a [plugin with extra skills](https://github.com/shopsavvy/shopsavvy-claude-plugin). |
+| **Claude Desktop and claude.ai** | Settings > Connectors > Add custom connector, name it ShopSavvy, paste the URL, no sign-in. Or use the stdio config in section 2 below. |
+| **ChatGPT** | Turn on Developer mode (Settings > Security and login), open chatgpt.com/plugins, click +, paste the URL, choose No Authentication. Needs a plan that offers developer mode. |
+| **OpenAI Codex** | `codex mcp add shopsavvy --url https://api.shopsavvy.com/mcp` |
+| **Gemini CLI** | `gemini mcp add --transport http shopsavvy https://api.shopsavvy.com/mcp`. By hand, put `"shopsavvy": { "httpUrl": "https://api.shopsavvy.com/mcp" }` under `mcpServers` in `~/.gemini/settings.json`. |
+| **Cursor** | In `~/.cursor/mcp.json` (or `.cursor/mcp.json`): `{ "mcpServers": { "shopsavvy": { "url": "https://api.shopsavvy.com/mcp" } } }` |
+| **VS Code (GitHub Copilot)** | In `.vscode/mcp.json`: `{ "servers": { "shopsavvy": { "type": "http", "url": "https://api.shopsavvy.com/mcp" } } }`, then use Agent mode. |
+| **Windsurf (Devin Desktop)** | In `~/.config/devin/mcp_config.json`: `{ "mcpServers": { "shopsavvy": { "serverUrl": "https://api.shopsavvy.com/mcp" } } }` |
+| **Anything else** | Streamable HTTP: `https://api.shopsavvy.com/mcp`. HTTP+SSE: `https://api.shopsavvy.com/mcp/sse`. stdio only: section 2 below. |
+
+To confirm it works, ask "What's the best price for AirPods Pro right now?". The answer should end with a source line linking the product page on shopsavvy.com.
+
+If a client can't connect, check the URL first, then open an issue (links at the bottom). Anonymous use is limited to 10 tool calls a minute and 100 an hour per IP; add a key for more (below).
 
 ### 2. This package (for stdio-only clients)
 
@@ -99,7 +119,7 @@ bun test
 
 ## Support
 
-- Docs: [shopsavvy.com/agents](https://shopsavvy.com/agents)
+- Docs: [shopsavvy.com/agents](https://shopsavvy.com/agents) · [Changelog](CHANGELOG.md) · [More prompts](examples/usage-examples.md)
 - Free tools, no install: [UPC lookup](https://shopsavvy.com/tools/upc-lookup) · [QR code generator](https://shopsavvy.com/qr/create)
 - Issues: [github.com/shopsavvy/shopsavvy-mcp-server/issues](https://github.com/shopsavvy/shopsavvy-mcp-server/issues)
 - Email: hello@greatwork.company

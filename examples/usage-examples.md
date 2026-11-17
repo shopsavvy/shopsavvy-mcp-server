@@ -1,6 +1,6 @@
-# ShopSavvy Data API MCP Server - Usage Examples
+# ShopSavvy MCP Server: example prompts
 
-This document provides examples of how to interact with the ShopSavvy Data API MCP Server in Claude Desktop.
+Prompts that work in any MCP client connected to the ShopSavvy MCP server. Lookups, offers, price history and the content tools work with no API key; scheduling and usage need a Data API key (see the README).
 
 ## Product Lookup Examples
 
@@ -108,6 +108,20 @@ I want to monitor prices for these gaming products: B07VGRJDFY, B08H75RTZ8, B08J
 ### Historical Analysis
 ```
 Analyze the price trends for ASIN B08N5WRWNW over the past 3 months. Show me the price history and identify the best deals.
+```
+
+## Buying Guides and Reviews (no key needed)
+
+```
+What are the best air fryers right now, and where is the cheapest place to buy the top pick?
+```
+
+```
+Give me the pros, cons and a verdict for the Sony WH-1000XM5.
+```
+
+```
+Is now a good time to buy a TV?
 ```
 
 ## Tips for Best Results
